@@ -25,7 +25,7 @@ class Field{
             if(this.gameFieldHeight >= 1 && this.gameFieldHeight <= 10){
                 break;
             } else{
-                console.log('Please choose the height of the game field between 1 and 10')
+                console.log(chalk.red('Please choose the height of the game field between 1 and 10'))
             }
         }
         
