@@ -64,16 +64,16 @@ class Field{
         const answer = prompt('Which way do you want to go --->').toLowerCase();
         switch(answer){
             case "u":
-                this.locationY -= 1;
+                this.locationY -= 1; //Where 'u' key is pressed, pathCharacter will move up by 1 row 
                 break;
             case 'd':
-                this.locationY += 1;
+                this.locationY += 1; //Where 'd' key is pressed, pathCharacter will move down by 1 row 
                 break;
             case 'l':
-                this.locationX -= 1;
+                this.locationX -= 1; //Where 'l' key is pressed, pathCharacter will move left by 1 column 
                 break;
             case 'r':
-                this.locationX += 1;
+                this.locationX += 1; //Where 'l' key is pressed, pathCharacter will move right by 1 column
                 break;
             default:
                 console.log('Invalid key selected. Enter U, D, L, R.')
