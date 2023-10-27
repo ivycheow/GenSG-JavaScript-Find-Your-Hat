@@ -17,15 +17,39 @@ class Field{
         this.locationY = 0; //To keep track current position of the player within the field for heights
     }
 
+    //Get user input on the size of the gameField
+    gameFieldSize(){
+        //To create a loop and ensure that user has fulfilled the input criteria of using number between 1 to 10
+        while(true){
+            this.gameFieldHeight = parseInt(prompt('Please input the height of the game field in number between 1 and 10 --->'));
+            if(this.gameFieldHeight >= 1 && this.gameFieldHeight <= 10){
+                break;
+            } else{
+                console.log('Please choose the height of the game field between 1 and 10')
+            }
+        }
+        
+        while(true){
+            this.gameFieldWidth = parseInt(prompt('Please input the width of the game field in number between 1 and 10 --->'));
+            if(this.gameFieldWidth >= 1 && this.gameFieldWidth <= 10){
+                break;
+            } else{
+                console.log('Please choose the width of the game field between 1 and 10')
+            }
+        }
+
+        return {height:this.gameFieldHeight, width: this.gameFieldWidth}
+    }
+
     //Generate a randomised Field with 3 params: height, width, percentage (percentage of field to be covered with holes)
     //gameField should be a 2D array -> gameField[rowIndex - y][columnIndex - x]
-    static generateField(height, width, percentage){
+    static generateField(gameFieldHeight, gameFieldWidth, percentage=0.2){
         //Create a new array to be used as the height of the field
-        let field = new Array(height);
+        let field = new Array(gameFieldHeight);
 
         //Create another array nested within the above array for width and restricted by the height specified
         for(let i = 0; i < field.length; i++){
-            field[i] = new Array(width);
+            field[i] = new Array(gameFieldWidth);
 
             //Create a nested loop to loop through the columns and add individual elements
             for(let j = 0; j < field[i].length; j++){
@@ -37,12 +61,16 @@ class Field{
         }
 
         //Generate random hat location in field
-        const hatLocation = {
-            //Represents which column will the hat be at 
-            x: Math.floor(Math.random() * width),
-            //Represents which row will the hat be at 
-            y: Math.floor(Math.random() * height)
-        }
+        let hatLocation;
+        do {
+            hatLocation = {
+                //Represents which column will the hat be at 
+                x: Math.floor(Math.random() * gameFieldWidth),
+                //Represents which row will the hat be at 
+                y: Math.floor(Math.random() * gameFieldHeight)
+            };
+        } while(field[hatLocation.y] === undefined || field[hatLocation.y][hatLocation.x] === undefined);
+
         //Based on the random number generated above for the respective row and column, it will be the coordinate of where the hat will be 
         field[hatLocation.y][hatLocation.x] = hat;
         return field
@@ -132,5 +160,6 @@ class Field{
     }
 }
 
-const newField = new Field(Field.generateField(10,10,0.2))
-newField.playGame()
+const size = new Field().gameFieldSize();
+const newField = new Field(Field.generateField(size.height, size.width, 0.2));
+newField.playGame();
