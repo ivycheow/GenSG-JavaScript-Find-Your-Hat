@@ -1,0 +1,8 @@
+Q: What did you like about this project?
+A: I like that it has challenged me to think oout of the box and allowed me to approach the requirements using different ways. I have learnt a lot in JavaScript knowledge especially Classes and Methods. 
+
+Q: What did you struggle with in this project?
+A: I have struggled in trying to build the randomised game field for the game as it is something new and it requires more time and to look for different resources to achieve the desired outcome.
+
+Q: What would make your experience with this assessment better?
+A: Not applicable.

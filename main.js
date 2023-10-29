@@ -15,6 +15,7 @@ class Field{
         this._field[0][0]=pathCharacter; // Define the starting point of pathCharacter
         this.locationX = 0; //To keep track current position of the player within the field for columns
         this.locationY = 0; //To keep track current position of the player within the field for heights
+        this.stopGame = false;
     }
 
     //Get user input on the size of the gameField
@@ -25,7 +26,7 @@ class Field{
             if(this.gameFieldHeight >= 1 && this.gameFieldHeight <= 10){
                 break;
             } else{
-                console.log(chalk.red('Please choose the height of the game field between 1 and 10'))
+                console.log('Please choose the height of the game field between 1 and 10')
             }
         }
         
@@ -84,7 +85,7 @@ class Field{
 
     //Display instructions on top of the gameField using template string
     instructions(){
-        console.log(`\nWELCOME TO FIND THE HAT CHALLENGE\n\n***INSTRUCTIONS***\nType U, D, L, R (Up, Down, Left, Right) and hit Enter to find the hat.\n`)
+        console.log(`\nWELCOME TO FIND THE HAT CHALLENGE\n\n***INSTRUCTIONS***\nType U, D, L, R (Up, Down, Left, Right) and hit Enter to find the hat.\nType Q to quit the game`)
     }
 
     //Obtain user's input on the movement and show it on the console
@@ -102,6 +103,9 @@ class Field{
                 break;
             case 'r':
                 this.locationX += 1; //Where 'l' key is pressed, pathCharacter will move right by 1 column
+                break;
+            case 'q':
+                this.stopGame = true;
                 break;
             default:
                 console.log('Invalid key selected. Enter U, D, L, R.')
@@ -152,6 +156,9 @@ class Field{
                 console.log('Congrats! You have found the hat!');
                 playingGame = false;
                 break;
+            } else if(this.stopGame){
+                console.log('You have quit the game!')
+                playingGame = false;
             }
         
         //Show user's movement on the gameField
@@ -161,5 +168,5 @@ class Field{
 }
 
 const size = new Field().gameFieldSize();
-const newField = new Field(Field.generateField(size.height, size.width, 0.2));
+const newField = new Field(Field.generateField(size.height, size.width, 0.1));
 newField.playGame();
